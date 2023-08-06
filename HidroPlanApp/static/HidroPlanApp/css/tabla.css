@@ -1,0 +1,33 @@
+.main-container{
+    /*background-color: #74ccb2fa;*/
+    
+    width: 200px;
+    margin: 50px auto;
+    border-radius: 15px;
+    padding: 1px 0px;
+  }
+  
+  table{
+  background-color:aliceblue ;
+  text-align: center;
+  border-collapse: collapse;
+  width: 100%;
+  }
+  
+  th,td{
+    padding: 10px;
+  }
+  
+  thead{
+    background-color: #246355;
+    border-bottom: solid 5px #0F362D;
+    color: rgb(241, 233, 233);
+  }
+  tr:nth-child(even){
+  background-color: #ddd;
+  }
+  tr:hover td{
+    background-color: #bbf7c5;
+    color: rgb(41, 28, 28);
+  
+  }

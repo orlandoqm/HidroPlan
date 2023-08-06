@@ -1,0 +1,18 @@
+{% extends "HidroPlanApp/base.html" %}
+{% load static %}
+{% block content %}
+<title>Hidroplan-Registrarse</title><!-- ESTA APP NO SE ESTA USANDO-->
+
+
+<div class="contenedorRegistro"> 
+  <form action="" method="POST" style="text-align: center;">
+    <h2 style="color: aliceblue;">Registroxxxx</h2>
+    {% csrf_token %}
+    <table  style="color: aliceblue; margin: 20px auto;" > {{registroForm.as_table}}</table>
+    <input class="boton2" type="submit" value="Cancelar" >
+    <input class="boton2" type="submit" value="Registrar" >
+  </form>
+
+ </div>
+
+    {% endblock  %}

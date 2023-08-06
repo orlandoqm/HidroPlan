@@ -1,0 +1,177 @@
+<html>
+  
+  <head>
+    {% load pwa %} {% progressive_web_app_meta %} {% load static %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap -->
+    <link
+      href="{% static 'HidroPlanApp/vendor/bootstrap/css/bootstrap.min.css ' %}"
+      rel="stylesheet"
+    />
+
+    <!-- Fonts -->
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Styles -->
+    <link href="{% static 'HidroPlanApp/css/gestion.css' %}" rel="stylesheet" />
+
+    <link rel="icon" type="image/x-icon" href="{% static 'HidroPlanApp/img/icono.ico' %}">
+  </head>
+
+  <body>
+    <h1 class="site-heading text-center text-white d-none d-lg-block">
+      <span class="site-heading-lower">HidroPlan</span>
+    </h1>
+
+    <div style="text-align: right; margin: 20px; color: white">
+      {% if user.is_authenticated %} Usuario:{{user.username}} &nbsp;&nbsp;
+      <a href="{% url 'cerrarSesion' %}" style="color: white">Cerrar sesión</a>
+
+      {% else %}
+      <a href="{% url 'iniciarSesion' %}" style="color: white"
+        >Iniciar sesión
+      </a>
+      &nbsp;&nbsp;<a href="{% url 'autenticacion' %}" style="color: white"
+        >Registrar</a
+      >
+      {% endif %}
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark py-lg-6" id="mainNav">
+      <div class="container">
+        <a
+          class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none"
+          href="{% url 'home' %}"
+        ></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <img
+            class="intro-img img-fluid mb-3 mb-lg-0 rounded"
+            src="{% static 'HidroPlanApp/img/logo.png' %}"
+            align="left"
+            width="120"
+            height="50"
+            alt=""
+          />
+
+          <ul class="navbar-nav mx-auto">
+            <li
+              class="nav-item{% if '/home' in request.path %} active {% endif %} px-lg-4"
+            >
+              <a
+                class="nav-link text-uppercase text-expanded"
+                href="{% url 'home' %}"
+                >Inicio</a
+              >
+            </li>
+            <li
+              class="nav-item {% if '/lechuga' in request.path %} active {% endif %} px-lg-4"
+            >
+              <a
+                class="nav-link text-uppercase text-expanded"
+                href="{% url 'lechuga' %}"
+                >Lechuga</a
+              >
+            </li>
+            <li
+              class="nav-item {% if '/betabel' in request.path %} active {% endif %} px-lg-4"
+            >
+              <a
+                class="nav-link text-uppercase text-expanded"
+                href="{% url 'betabel' %}"
+                >Betabel</a
+              >
+            </li>
+            <li
+              class="nav-item {% if '/espinaca' in request.path %} active {% endif %} px-lg-4"
+            >
+              <a
+                class="nav-link text-uppercase text-expanded"
+                href="{% url 'espinaca' %}"
+                >Espinaca</a
+              >
+            </li>
+            {% if user.is_authenticated %}
+            <li
+              class="nav-item {% if '/registros' in request.path %} active {% endif %} px-lg-4"
+            >
+              <a
+                class="nav-link text-uppercase text-expanded"
+                href="{% url 'registros' %}"
+                >Registros</a
+              >
+            </li>
+            <li
+              class="nav-item {% if '/datosPersonales' in request.path %} active {% endif %} px-lg-4"
+            >
+              <a
+                class="nav-link text-uppercase text-expanded"
+                href="{% url 'datosPersonales' %}"
+                >Datos personales</a
+              >
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Parte dinamica -->
+    {% block content %} {% endblock %}
+
+    <!-- Footer -->
+    <footer class="footer text-faded text-center py-5">
+      <div class="container">
+        <p class="m-0">
+          <a href="#" class="link">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+            </span>
+          </a>
+          <a href="#" class="link">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+            </span>
+          </a>
+          <a href="#" class="link">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+            </span>
+          </a>
+        </p>
+        <p class="m-0 mbt">
+          <a href="sample.html" class="link">Política de privacidad</a> ·
+          <a href="sample.html" class="link">Aviso legal</a> ·
+        </p>
+        <p class="m-0 mbt1">&copy; HidroPlan 2023</p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap -->
+    <script src="{% static 'HidroPlanApp/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'HidroPlanApp/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,141 @@
+{% extends "HidroPlanApp/base.html" %} {% load static %} {% block content %}
+<title>Hidroplan-{{ titulo_pagina }}</title>
+<div class="contenedorHome">
+  {% if user.is_authenticated %} 
+  
+  <div class="row">
+    
+
+    <div class="col" style="text-align: center; color: aliceblue; width: 100%">
+      <h4 class="section-heading mb-4">
+        <span class="section-heading-lower"> Bienvenido {{user.username}}</span>
+        
+      </h4>
+    </div>
+
+    
+      <div class="col-md-12 text-center">    
+          <img
+          class="img-fluid mx-auto"
+            style="text-align: center; width: 50%;"
+            src="{% static 'HidroPlanApp/img/GrupoH.png' %}"
+          
+          />
+          
+      </div>
+      <div class="col" style="text-align: center; color: aliceblue; width: 100%">
+        <h4 class="section-heading mb-4">
+          <span class="section-heading-upper">Gracias por registrarte</span>
+          <span class="section-heading-upper">Ahora puedes ver los datos de tus registros del cultivo en cualquier 
+            momento donde tengas conexion a internet. Podras recibir notificaciones en
+            el correo, y eliminar registros cuando lo deseé.</span>
+          
+        </h4>
+      </div>
+  
+  
+   
+
+  </div>
+  
+  {% else %}
+  <div class="row">
+    <div class="col">
+      <div class="card" style="width: 100%; margin: 5px">
+        <div class="card col-md-20 ">
+          <img
+            class="img-fluid mx-auto"
+            style="text-align: center; width: 100%"
+            src="{% static 'HidroPlanApp/img/principal_I.jpg' %}"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+  
+    <div class="col" style="text-align: center; color: rgb(240, 248, 255); width: 100%">
+      <h4 class="section-heading mb-4">
+        <span class="section-heading-lower"> HidroPlan</span>
+        <span class="section-heading-upper">
+          Visualiza las fechas importantes 
+          de tu cultivo al instante de 
+           forma organizada.
+        </span>
+      </h4>
+    </div>
+    <div class="col">
+      <div class="card" style="width: 100%; margin: 5px">
+        <div class="card col-md-20 ">
+          <img
+            class="img-fluid mx-auto"
+            style="text-align: center; width: 100%"
+            src="{% static 'HidroPlanApp/img/principal.jpg' %}"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    
+
+    <div class="col" style="text-align: center; color: rgb(240, 248, 255); width: 100%; margin: 30px;">
+      <h4 class="section-heading mb-5">
+        <span class="section-heading-lower"> Registrate!!</span>
+        
+       
+        <span class="section-heading-upper">
+          Registrate, guarda tus registros y recibiras notificaciones en tu correo
+          en cada fecha importante de tu cultivo, ademas de que podras consultar tus registros realizados.
+          
+        </span>
+        <a href="{% url 'autenticacion' %}"> 
+        <button
+        
+        type="submit"
+        style="margin: 0px 217px"
+        class="btn btn-success btn-lg"
+      >
+        REGISTRATE GRATIS
+      </button>
+      </a>
+      </h4>
+      
+    </div>
+    
+    
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 text-center">    
+        <img
+        class="img-fluid mx-auto"
+          style="text-align: center; width: 50%;"
+          src="{% static 'HidroPlanApp/img/notif.png' %}"
+        
+        />
+      
+    </div>
+  
+    
+
+  </div>
+
+
+ 
+  
+  {% endif %}
+</div>
+
+<script>
+  // Selecciona el botón por su ID
+  var boton = document.getElementById("miBoton");
+
+  // Agrega un evento de clic al botón
+  boton.addEventListener("click", function() {
+      // Redirige a la otra página cuando se hace clic en el botón
+      window.location.href = "ruta-de-la-otra-pagina.html";
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,41 @@
+.main-container{
+    /*background-color: #74ccb2fa;*/
+    
+    width: 200px;
+    margin: 50px auto;
+    border-radius: 15px;
+    padding: 1px 0px;
+  }
+  
+   .contenedorRegistro{
+    
+   background: linear-gradient(rgb(190, 206, 191,0.3), rgb(84, 155, 56,0.5));
+    width: 70%;
+    margin: 20px auto;
+    border-radius: 15px 0px;
+    padding: 1px 0px;
+  }
+  .tablaO{
+  background-color:rgb(11, 132, 238) ;
+  text-align: center;
+  border-collapse: collapse;
+  width: 50%;
+  }
+  /*
+  th,td{
+    padding: 10px;
+  }
+  
+  thead{
+    background-color: #ec7c1300;
+    border-bottom: solid 5px #e9080805;
+    color: rgb(241, 233, 233);
+  }
+  tr:nth-child(even){
+  background-color: #ddd;
+  }
+  tr:hover td{
+    background-color: #bbf7c5;
+    color: rgb(41, 28, 28);
+  
+  }*/

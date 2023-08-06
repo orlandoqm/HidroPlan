@@ -1,0 +1,216 @@
+{% extends "HidroPlanApp/base.html" %} {% load static %} {% block content %}
+<title>Hidroplan-Registros</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="{% static 'HidroPlanApp/css/tabla.css' %}" rel="stylesheet" />
+<link href="{% static 'Registros/css/tabla.css' %}" rel="stylesheet" />
+
+<div class="contenedorRegistro">
+  <form action="" method="POST" style="text-align: center">
+    <h2 style="color: aliceblue">Registros</h2>
+
+    {% csrf_token %}
+    
+    
+      <h5 style="text-align: left; color: white; margin-left: 3%;">Filtrar por:</h5>
+   
+  
+      <table
+        class="tablaO"
+        name="tablaO"
+        id="tablaO"
+        style="width: 15%; margin: 2%;"
+      >
+        <tbody>
+          <thead>
+            <tr>
+              <th style="border: hidden; ">
+                
+
+                <input
+                style="margin: 2% ;width: 170px; height: 40px;"
+                  type="date"
+                  name="fecha"
+                  class="form-control form-control-sm"
+                  id="fecha"
+                  
+                />
+                
+                  <input
+                    type="submit"
+                    class="btn btn-success"
+                    name="bt"
+                    value="Fecha de siembra"
+                    style="margin: 2% ;"
+                  />
+                  <input
+                  type="submit"
+                  class="btn btn-success"
+                  name="bt"
+                  value="Fecha de cosecha"
+                />
+                
+              </th>
+              
+              <th style="border: hidden">
+                
+
+               
+               
+              </th>
+              
+            </tr>
+          </thead>
+        </tbody>
+      </table>
+  
+
+    
+    
+    <h3 style="color: rgb(253, 251, 251)">Lechuga</h3>
+    <label for="eliminarLechuga" style="color: white;">Inserta el id :</label>
+                  <input
+                  type="number"
+              
+                  value=""
+                  id="eliminarLechuga"
+                  name="eliminarLechuga"
+                  min="0"
+                  style="width: 70; height:30;"
+                />
+                <input
+                    type="submit"
+                    class="btn btn-success"
+                    name="bt"
+                    value="Eliminar registro de lechuga"
+                    style="margin: 2% ;"
+                  />
+    <table name="tablaL" id="tablaL" style=" margin: auto; width: 95%;">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Cantidad de plantas</th>
+          <th>Fecha de siembra</th>
+          <th>Fecha de germinacion</th>
+          <th>Fecha de trasplante</th>
+          <th>Fecha de cosecha</th>
+          <th>Kg aproximado de cosecha</th>
+        </tr>
+      </thead>
+
+      {% for lista in listaLechuga %}
+
+      <tr>
+        <td>{{lista.id}}</td>
+        <td>{{lista.cantPlantas}}</td>
+        <td>{{lista.fechaSiembra | date:"Y-m-d"}}</td>
+        <td>{{ lista.fechaGerminacion| date:"Y-m-d"}}</td>
+        <td>{{lista.fechaTrasplante | date:"Y-m-d"}}</td>
+        <td>{{lista.fechaCosecha | date:"Y-m-d"}}</td>
+       
+        <td>{{lista.kgAproxCosecha}}</td>
+      </tr>
+
+      {% endfor %}
+    </table>
+    <p style="color: white;">pH: 6  &nbsp;&nbsp;&nbsp;Temperatura: 20 °C </p>
+    <br>
+    
+
+    <h3 style="color: rgb(253, 251, 251)">Betabel</h3>
+    <label for="eliminarBetabel" style="color: white;">Inserta el id :</label>
+                  <input
+                  type="number"
+              
+                  value=""
+                  id="eliminarBetabel"
+                  name="eliminarBetabel"
+                  min="0"
+                  style="width: 70; height:30;"
+                />
+                <input
+                    type="submit"
+                    class="btn btn-success"
+                    name="bt"
+                    value="Eliminar registro de betabel"
+                    style="margin: 2% ;"
+                  />
+    <table name="tabla1" id="tabla1" style=" margin: auto; width: 95%;">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Cantidad de plantas</th>
+          <th>Fecha de siembra</th>
+          <th>Fecha de germinacion</th>
+          <th>Fecha de trasplante</th>
+          <th>Fecha de cosecha</th>
+        </tr>
+      </thead>
+
+      {% for lista in listaBetabel %}
+
+      <tr>
+        <td>{{lista.id}}</td>
+        <td>{{lista.cantPlantas}}</td>
+        <td>{{lista.fechaSiembra | date:"Y-m-d"}}</td>
+        <td>{{ lista.fechaGerminacion| date:"Y-m-d"}}</td>
+        <td>{{lista.fechaTrasplante | date:"Y-m-d"}}</td>
+        <td>{{lista.fechaCosecha | date:"Y-m-d"}}</td>
+      </tr>
+
+      {% endfor %}
+    </table>
+    <p style="color: white;">pH: 6.5-7.1 &nbsp;&nbsp;&nbsp; Temperatura: 20-30 °C </p>
+    <br>
+    
+    <h3 style="color: rgb(253, 251, 251)">Espinaca</h3>
+    <label for="eliminarEspinaca" style="color: white;">Inserta el id :</label>
+                  <input
+                  type="number"
+              
+                  value=""
+                  id="eliminarEspinaca"
+                  name="eliminarEspinaca"
+                  min="0"
+                  style="width: 70; height:30;"
+                />
+                <input
+                    type="submit"
+                    class="btn btn-success"
+                    name="bt"
+                    value="Eliminar registro de espinaca"
+                    style="margin: 2% ;"
+                  />
+    <table name="tabla1" id="tabla1" style=" margin: auto; width: 95%;">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Cantidad de plantas</th>
+          <th>Fecha de siembra</th>
+          <th>Fecha de germinacion</th>
+          <th>Fecha de trasplante</th>
+          <th>Fecha de cosecha</th>
+        </tr>
+      </thead>
+
+      {% for lista in listaEspinaca %}
+
+      <tr>
+        <td>{{lista.id}}</td>
+        <td>{{lista.cantPlantas}}</td>
+        <td>{{lista.fechaSiembra | date:"Y-m-d"}}</td>
+        <td>{{ lista.fechaGerminacion| date:"Y-m-d"}}</td>
+        <td>{{lista.fechaTrasplante | date:"Y-m-d"}}</td>
+        <td>{{lista.fechaCosecha | date:"Y-m-d"}}</td>
+      </tr>
+
+      {% endfor %}
+    </table>
+    <p style="color: white;">pH: 5.8 - 6.0 &nbsp;&nbsp;&nbsp;Temperatura: 20-30 °C </p>
+  </form>
+</div>
+<script type="text/javascript">
+  
+  
+</script>
+
+{% endblock %}

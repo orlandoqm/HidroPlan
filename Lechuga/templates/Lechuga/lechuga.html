@@ -1,0 +1,214 @@
+{% extends "HidroPlanApp/base.html" %} {% load static %} {% block content %}
+<title>Hidroplan-Lechuga</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="{% static 'HidroPlanApp/css/tabla.css' %}" rel="stylesheet" />
+<div class="container">
+  <h3 style="text-align: center; color: aliceblue">Lechuga batavia</h3>
+
+  <p style="color: aliceblue">{{bandera.0}}</p>
+  <form action="" method="POST" style="text-align: right">
+    {% csrf_token %}
+
+    <div style="text-align: center; color: white">
+      <label>
+        <input
+          type="radio"
+          name="numero"
+          onclick="ocultarfc();"
+          value="1"
+          checked
+        />
+        Con fecha de siembra
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="numero"
+          onclick="ocultarfs();"
+          value="{{user.id}}"
+          id="rr"
+        />
+        Con fecha de cosecha
+      </label>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="card" id="siembra" style="width: 75%; margin: 5px">
+          <div class="card h-20">
+            <img
+              src="{% static 'Lechuga/img/siembraL.jpg' %}"
+              class="card-img-top"
+            />
+          </div>
+
+          <div class="card-body" style="text-align: center">
+            <p style="margin: 0%">Fecha de siembra</p>
+
+            <input
+              type="date"
+              name="fDs"
+              class="form-control form-control-sm"
+              id="FechaActual"
+              required
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card" style="width: 75%; margin: 5px 10px 50px">
+          <img
+            src="{% static 'Lechuga/img/cantidad.jpg' %}"
+            class="card-img-top"
+          />
+          <div class="card-body" style="text-align: center">
+            <p style="margin: 0%">Cantidad de plantas</p>
+            <p style="margin: 5px 10px 1px">
+              <input
+                type="number"
+                name="cantPlantas"
+                value="5"
+                id="cp"
+                name="tentacles"
+                min="5"
+                max="1000"
+                required
+              />
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card" style="width: 75%; margin: 5px">
+          <img
+            src="{% static 'Lechuga/img/cosecha.jpg' %}"
+            class="card-img-top"
+          />
+          <div class="card-body" style="text-align: center">
+            <p style="margin: 0%">Fecha de cosecha esperada</p>
+
+            <input
+              type="date"
+              name="fDc"
+              class="form-control form-control-sm"
+              id="FechaPost"
+              required
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align: center">
+      <!--  <input class="boton" type="submit" value="Cancelar" > -->
+      <input type="submit" class="btn btn-success" name="bt" value="enviar" />
+    </div>
+    
+
+    <div style="margin: 15px 10px 10px 10px; text-align: center">
+      <table name="tabla1" id="tabla1">
+        <thead>
+          <tr>
+            <th>Fecha de siembra</th>
+            <th>Fecha de germinacion</th>
+            <th>Fecha de trasplante</th>
+            <th>Fecha de cosecha</th>
+            <th>Cantidad de plantas</th>
+            <th>Kg aproximado de cosecha</th>
+            <th>pH</th>
+            <th>Temperatura(°C) </th>
+          </tr>
+        </thead>
+
+        <tr>
+          <td>{{fechasCalculadas.0}}</td>
+          <td>{{fechasCalculadas.1}}</td>
+          <td>{{fechasCalculadas.2}}</td>
+          <td>{{fechasCalculadas.3}}</td>
+          <td>{{fechasCalculadas.4}}</td>
+          <td>{{fechasCalculadas.5}}</td>
+          <td>{{fechasCalculadas.6}}</td>
+          <td>{{fechasCalculadas.7}}</td>
+        </tr>
+      </table>
+      {% if user.is_authenticated %}
+      <div style="text-align: center; margin: 15px 10px 10px">
+        <input
+          class="btn btn-success"
+          name="bt"
+          type="submit"
+          value="descartar"
+        />
+        <input
+          class="btn btn-success"
+          name="bt"
+          type="submit"
+          id="btnGuardar"
+          value="guardar"
+        />
+      </div>
+      {% endif %}
+    </div>
+   
+  </form>
+</div>
+
+<script type="text/javascript">
+  var fecha = new Date();
+
+  fecha.setDate(fecha.getDate());
+
+  document.getElementById("FechaActual").value = fecha.toJSON().slice(0, 10);
+
+  fecha.setDate(fecha.getDate() + 40);
+  document.getElementById("FechaPost").value = fecha.toJSON().slice(0, 10);
+
+  function ocultarfc() {
+    document.getElementById("FechaPost").style.display = "none";
+    document.getElementById("FechaActual").style.display = "block";
+  }
+  function ocultarfs() {
+    document.getElementById("FechaActual").style.display = "none";
+    document.getElementById("FechaPost").style.display = "block";
+  }
+  ocultarfc();
+
+  $("#btnGuardar").click(function () {
+    var idUsuario = document.getElementById("rr").value;
+    var cantidadP = document.getElementById("cp").value;
+
+    $("table tbody>tr").each(function () {
+      var self = $(this);
+      var fechaS = self.find("td:eq(0)").text().trim();
+      var fechaG = self.find("td:eq(1)").text().trim();
+      var fechaT = self.find("td:eq(2)").text().trim();
+      var fechaC = self.find("td:eq(3)").text().trim();
+      var cantidadP = self.find("td:eq(4)").text().trim();
+      var resultado = {
+        fechaS: fechaS,
+        fechaG: fechaG,
+        fechaT: fechaT,
+        fechaC: fechaC,
+        idUsuario: idUsuario,
+        cantPlantas: cantidadP,
+        csrfmiddlewaretoken: "{{ csrf_token }}",
+      };
+
+      $.ajax({
+        url: "{% url 'lechuga' %}",
+        data: resultado,
+        type: "POST",
+        success: function (r) {},
+        error: function (jqXHR, textStatus, error) {
+          console.log(error);
+        },
+        complete: function (xhr, status) {
+          console.log("finalizo");
+        },
+      });
+    });
+  });
+</script>
+
+{% endblock %}

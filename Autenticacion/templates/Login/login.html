@@ -1,0 +1,51 @@
+{% extends "HidroPlanApp/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<title>Hidroplan-Iniciar sesión</title>
+
+<div class="form-content my-3 p-3">
+    <div class="container">
+        <div class="row justify-content-center">
+           <div class="col-lg-5">
+
+
+<div class="card shadow-lg border-0  rounded-lg mt-0 mb-3" >
+                        <div class="card-header justify-content-center">
+                          <h3 class="font-weight-light my-4 text-center">Iniciar sesión</h3>
+                        </div>
+
+
+  <div class="card-body">
+  <form action="" method="POST" style="color: rgb(11, 117, 20);">
+
+    {% csrf_token %}
+    <div class="form-row">
+      <div class="col-md-10 offset-md-1">
+          <div class="form-group">
+
+      {{form|crispy}}
+
+  <div style="text-align:center;">
+    <button type="submit"  style=" margin: 0px 217px;" class="btn btn-success">Iniciar sesión</button>
+  </div>
+          </div>
+        </div>
+      </div>
+      {% if messages %}
+    
+      {% for mensaje in messages %}
+      <p style="color: red; font-size: 120%; text-align: center;">{{mensaje}}</p>
+   
+      {% endfor %}
+  
+      {% endif %}
+    </div>
+  </form>
+           </div>
+           </div>
+           </div>
+          </div>
+        </div>
+    {% endblock  %}
