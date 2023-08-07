@@ -161,6 +161,7 @@ MESSAGE_TAGS={
 
 
 # Configuración de Firebase
+''''
 FIREBASE_CONFIG = {
     "apiKey": "AIzaSyC0zz9fWUNpFZzI5MphzsVPBUJmz7w8igo",
     "authDomain":  "notificaciones-ed05c.firebaseapp.com",
@@ -170,7 +171,7 @@ FIREBASE_CONFIG = {
     "messagingSenderId":  "221105754482",
     "appId": "1:221105754482:web:34dae1a8fe1f5035988deb",
 
-}
+}'''
 #configuracion para envio de correos con gmail
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
