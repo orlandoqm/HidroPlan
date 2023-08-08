@@ -27,7 +27,7 @@ path('Betabel/', include('Betabel.urls')),
 path('Espinaca/', include('Espinaca.urls')),
 path('Autenticacion/', include('Autenticacion.urls')),
 path('DatosPersonales/', include('DatosPersonales.urls')),
-path('',include('pwa.urls')),
+#path('',include('pwa.urls')),
     
     
 ]
