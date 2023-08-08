@@ -180,4 +180,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'orlandoquirogam@gmail.com'  # Coloca aquí tu dirección de correo de Gmail
 EMAIL_HOST_PASSWORD = 'tzcabjgbgcsphafo'    # Coloca aquí la contraseña de tu cuenta de Gmail
 
-#PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR,'serviceworker.js')
+##PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR,'serviceworker.js')
