@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-oury_nywb(w*hn@qyba6p^sap+o5a*izjh!h)%ofmcor#0m$$h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['54.84.197.225']
 
 
 INSTALLED_APPS = [
@@ -180,4 +180,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'orlandoquirogam@gmail.com'  # Coloca aquí tu dirección de correo de Gmail
 EMAIL_HOST_PASSWORD = 'tzcabjgbgcsphafo'    # Coloca aquí la contraseña de tu cuenta de Gmail
 
-##PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR,'serviceworker.js')
+#PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR,'serviceworker.js')
