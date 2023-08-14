@@ -14,7 +14,7 @@ def registro(request):
    # listaLechuga=cultivo.objects.all()
     #print("id usuario--->",idU)
     
-   
+    obtener_email(request)
     id=obtener_id_usuario(request)
     listaLechuga=cultivo.objects.filter(idUsuario=id)
     listaBetabel=cultivoB.objects.filter(idUsuario=id)
@@ -100,3 +100,9 @@ def imprimir():
 def obtener_id_usuario(request):
     id_usuario = request.user.id
     return id_usuario
+
+@login_required
+def obtener_email(request):
+    email_usuario = request.user.email
+    print("---->",email_usuario)
+    return email_usuario

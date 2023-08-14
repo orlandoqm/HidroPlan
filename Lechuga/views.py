@@ -176,8 +176,8 @@ def guardarDatos(fecha1, fecha2, fecha3, fecha4, idUsuario, cantPlantas,request)
     
     #iniciarTiempo(nombre,hora1,hora2,hora3,hora4)
     
-
-    iniciarTiempo(nombre,f1,f2,f3,f4)
+    email=obtener_email(request)
+    iniciarTiempo(nombre,f1,f2,f3,f4,email)
     lechuga.save()#COMENTADO TEMPORALMENTE
 
 
@@ -225,6 +225,12 @@ def crear_claveDeRegistro(request):
      caracter += word[0]
      nombreUsuario=nombreUsuario[0]+caracter
  return nombreUsuario
+
+@login_required
+def obtener_email(request):
+    email_usuario = request.user.email
+    print("---->",email_usuario)
+    return email_usuario
 
 
 

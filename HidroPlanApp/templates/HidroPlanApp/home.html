@@ -1,5 +1,5 @@
 {% extends "HidroPlanApp/base.html" %} {% load static %} {% block content %}
-<title>Hidroplan-{{ titulo_pagina }}</title>
+<title>Hidroplan-Home</title>
 <div class="contenedorHome">
   {% if user.is_authenticated %} 
   
@@ -27,7 +27,7 @@
         <h4 class="section-heading mb-4">
           <span class="section-heading-upper">Gracias por registrarte</span>
           <span class="section-heading-upper">Ahora puedes ver los datos de tus registros del cultivo en cualquier 
-            momento donde tengas conexion a internet. Podras recibir notificaciones en
+            momento donde tengas conexión a internet. Podras recibir notificaciones en
             el correo, y eliminar registros cuando lo deseé.</span>
           
         </h4>
@@ -87,7 +87,8 @@
        
         <span class="section-heading-upper">
           Registrate, guarda tus registros y recibiras notificaciones en tu correo
-          en cada fecha importante de tu cultivo, ademas de que podras consultar tus registros realizados.
+          en cada fecha importante de tu cultivo, ademas de que podras consultar tus
+           registros realizados.
           
         </span>
         <a href="{% url 'autenticacion' %}"> 
