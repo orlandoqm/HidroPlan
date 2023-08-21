@@ -10,6 +10,7 @@ def ejecutarHilo(**kwargs):
     f1=kwargs['fechaGerminacion']
     f2=kwargs['fechaTrasplante']
     f3=kwargs['fechaCosecha']
+    correoDestino=kwargs['correo']
     
     #formateo de las fechas para que puedan compararlas "%Y-%m-%d"
     formatting = "%Y-%m-%d"
@@ -36,7 +37,7 @@ def ejecutarHilo(**kwargs):
        print("Las semillas ya estan germinadas...")
        asunto="Las semillas ya estan germinadas!!"
        mensaje="Las semillas ya estan germinadas..."
-       enviar_correo(asunto, mensaje)
+       enviar_correo(asunto, mensaje,correoDestino)
        fin=True
      else:
       diasSumados+=1#contador para simular el paso del dia
@@ -59,7 +60,7 @@ def ejecutarHilo(**kwargs):
        print("Las plantas listas para trasplantarse...")
        asunto="Las plantas estan listas para trastaplantar!!"
        mensaje="Las plantas estan listas para trastaplantar..."
-       enviar_correo(asunto, mensaje)
+       enviar_correo(asunto, mensaje,correoDestino)
        fin2=True
      else:
       diasSumados+=1#contador para simular el paso del dia
@@ -79,7 +80,7 @@ def ejecutarHilo(**kwargs):
        print("Las plantas listas para cosecharse...")
        asunto="Las plantas estan listas para cosechar!!"
        mensaje="Las plantas estan listas para cosechar..."
-       enviar_correo(asunto, mensaje)
+       enviar_correo(asunto, mensaje,correoDestino)
        fin3=True
      else:
       diasSumados+=1#contador para simular el paso del dia
@@ -90,19 +91,19 @@ def ejecutarHilo(**kwargs):
     
 
 
-def iniciarTiempo(nombre,fechaSiembra,fechaGerminacion,fechaTrasplante,fechaCosecha): 
+def iniciarTiempo(nombre,fechaSiembra,fechaGerminacion,fechaTrasplante,fechaCosecha,email): 
  hilo1=threading.Thread(target=ejecutarHilo,name=nombre,kwargs={'fechaSiembra': fechaSiembra, 'fechaGerminacion': fechaGerminacion,
-                                                                'fechaTrasplante':fechaTrasplante,'fechaCosecha':fechaCosecha})
+                                                                'fechaTrasplante':fechaTrasplante,'fechaCosecha':fechaCosecha,'correo':email})
  hilo1.start()
  print(hilo1.is_alive)
 
 
 
-def enviar_correo(asunto,mensaje,):
+def enviar_correo(asunto,mensaje,correoDestino):
     subject = "Betabel: "+asunto
     message = mensaje
     from_email = 'orlandoquirogam@gmail.com'  # Aquí puede ser la misma dirección configurada en settings.py o una diferente.
-    recipient_list = ['erikquirogamaldonado@gmail.com ']  # Coloca la dirección de correo del destinatario aquí.
+    recipient_list = [correoDestino]  # Coloca la dirección de correo del destinatario aquí.
 
     send_mail(subject, message, from_email, recipient_list)
 

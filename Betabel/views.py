@@ -133,8 +133,16 @@ def guardarDatos(fecha1, fecha2, fecha3, fecha4, idUsuario, cantPlantas,request)
     f3 = datetime.datetime.strptime(fecha3, '%d-%m-%Y').strftime('%Y-%m-%d')
     f4 = datetime.datetime.strptime(fecha4, '%d-%m-%Y').strftime('%Y-%m-%d')
 
-    betabel = cultivoB(
+    codigo = str(f1)
+    guion = "-"
 
+    for x in range(len(guion)):
+     codigo=codigo.replace(guion[x],"")
+
+    nombre=codigo+str(crear_claveDeRegistro(request))#nombre de usuario+fecha:20230627erick
+
+    betabel = cultivoB(
+        nombreRegistro=nombre,
         fechaSiembra=f1,
         fechaGerminacion=f2,
         fechaTrasplante=f3,
@@ -146,21 +154,11 @@ def guardarDatos(fecha1, fecha2, fecha3, fecha4, idUsuario, cantPlantas,request)
         idUsuario=idUsuario,
 
     )
-    codigo = str(f1)
-    guion = "-"
-
-    for x in range(len(guion)):
-     codigo=codigo.replace(guion[x],"")
-
-    nombre=codigo+str(crear_claveDeRegistro(request))#nombre de usuario+fecha:20230627erick
-    #usar hora en vez de fecha para las pruebas
-    hora_actual = datetime.datetime.now()
-    # alternativa
-    # hora_actual = datetime.datetime.now().time()
-    print("++++++++++++++++++++++++++++++++++++")
     
-    iniciarTiempo(nombre,f1,f2,f3,f4)
+    email=obtener_email(request)
     betabel.save()
+    iniciarTiempo(nombre,f1,f2,f3,f4,email)
+    
     
 
 
@@ -207,3 +205,10 @@ def crear_claveDeRegistro(request):
      caracter += word[0]
      nombreUsuario=nombreUsuario[0]+caracter
  return nombreUsuario
+
+@login_required
+def obtener_email(request):
+    email_usuario = request.user.email
+    print("---->",email_usuario)
+    return email_usuario
+

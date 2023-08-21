@@ -136,9 +136,17 @@ def guardarDatos(fecha1, fecha2, fecha3, fecha4, idUsuario, cantPlantas,request)
     f2 = datetime.datetime.strptime(fecha2, '%d-%m-%Y').strftime('%Y-%m-%d')
     f3 = datetime.datetime.strptime(fecha3, '%d-%m-%Y').strftime('%Y-%m-%d')
     f4 = datetime.datetime.strptime(fecha4, '%d-%m-%Y').strftime('%Y-%m-%d')
+    
+    #creacion de nombre de registro
+    codigo = str(f1)
+    guion = "-"
+    for x in range(len(guion)):
+     codigo=codigo.replace(guion[x],"")#2023-06-27-->20230627
+    nombre=codigo+str(crear_claveDeRegistro(request))#fecha+ iniciales del nombre y el apellido:20230627erick
+    print("------->",nombre)
 
     lechuga = cultivo(
-
+        nombreRegistro=nombre,
         fechaSiembra=f1,
         fechaGerminacion=f2,
         fechaTrasplante=f3,
@@ -150,35 +158,13 @@ def guardarDatos(fecha1, fecha2, fecha3, fecha4, idUsuario, cantPlantas,request)
         idUsuario=idUsuario,
 
     )
-    codigo = str(f1)
-    guion = "-"
-
-    for x in range(len(guion)):
-     codigo=codigo.replace(guion[x],"")
-
-    nombre=codigo+str(crear_claveDeRegistro(request))#nombre de usuario+fecha:20230627erick
-    #usar hora en vez de fecha para las pruebas
-    hora_actual = datetime.datetime.now()
-# alternativa
-# hora_actual = datetime.datetime.now().time()
-    print("++++++++++++++++++++++++++++++++++++")
-    #hora_formateada = hora_actual.strftime('%H:%M')
-    #print(hora_formateada)
-    #print("Hora fort: ",type(hora_formateada))
-    #creando una hora
-    ''' hora1=datetime.time(13,15)
-    print("hora 1: ",hora1)
-    print("Hora fort: ",type(hora1))
-    hora2=datetime.time(18,20)
-    hora3=datetime.time(17,44)
-    hora4=datetime.time(17,46)'''
     
     
-    #iniciarTiempo(nombre,hora1,hora2,hora3,hora4)
     
     email=obtener_email(request)
-    iniciarTiempo(nombre,f1,f2,f3,f4,email)
-    lechuga.save()#COMENTADO TEMPORALMENTE
+    #iniciarTiempo(nombre,f1,f2,f3,f4,email)
+    lechuga.save()#se guarda el registro en la BD
+    iniciarTiempo(nombre,f1,f2,f3,f4,email)#se llama a la ejecucion del proceso enviandoles los datos
 
 
 def consultarRegistrosx():
@@ -212,8 +198,7 @@ def crear_claveDeRegistro(request):
    
  #en caso de incuir clace con hora
  hora_actual = datetime.datetime.now()
- claveHora= str(hora_actual.hour)+str(hora_actual.minute)+str(hora_actual.second)
-
+ 
  nombreUsuario = request.user.first_name
  apellidoUsuario = request.user.last_name
     #string = 'hola mundo python'

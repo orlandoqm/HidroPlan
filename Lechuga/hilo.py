@@ -19,7 +19,8 @@ def ejecutarHilo(**kwargs):
     fechaT=datetime.datetime.strptime(f2, formatting).date()
     fechaC=datetime.datetime.strptime(f3, formatting).date()
 
-    
+    #inicia la ejecucion de las ETAPAS
+    #ciclo de TRASPLANTE
     fin=False
     diasSumados=0 #contador para simular el paso del dia
     while fin!=True:
@@ -46,7 +47,7 @@ def ejecutarHilo(**kwargs):
      #tiempoDeEspera=(diasFaltantes.days*86400)+604800# Notificacion a las 7:00 am PROBAR
      # sleep(tiempoDeEspera)# 1 dia=86400 segundos PRODUCCION
 
-
+     #ciclo de TRASPLANTE
      fin2=False
     while fin2!=True:
      fecha_actual = datetime.datetime.now().date()
@@ -66,7 +67,7 @@ def ejecutarHilo(**kwargs):
      else:
       diasSumados+=1#contador para simular el paso del dia
       sleep(1)# 1 dia=1  segundos PRUEBA
-   
+    #ciclo de COSECHA
     fin3=False
     while fin3!=True:
      fechaA=fecha_actual + datetime.timedelta(days=diasSumados)

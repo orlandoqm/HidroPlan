@@ -64,6 +64,7 @@ def eliminarRegistro(request,botonPulsado,listaLechuga,listaBetabel,listaEspinac
     try:
      lechuga = cultivo.objects.get(id = idL)
      lechuga.delete()
+     
      print("Registro eliminado!")
     except:
      print("El registro no existe")

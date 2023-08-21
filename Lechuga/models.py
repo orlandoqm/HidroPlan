@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 class cultivo(models.Model):
+    nombreRegistro=models.CharField(max_length=20,default=None, null=True)
     fechaSiembra=models.DateField()
     fechaGerminacion=models.DateField()
     fechaTrasplante=models.DateField()
