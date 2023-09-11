@@ -20,17 +20,12 @@ class vistaRegistro(View):
 
         if form.is_valid():
            email=form.cleaned_data.get("email")
-           print("--->",email)
-
-          
-
            usuario= form.save()
            login(request, usuario)
            
            return redirect('home')
         
         else:
-            print("no se valido el formulario!!!")
             for msg in form.error_messages:
                 messages.error(request, form.error_messages[msg])
             
@@ -48,8 +43,6 @@ def iniciarSesion(request):
         if form.is_valid():
             nombreUsuario=form.cleaned_data.get("username")
             contrasena=form.cleaned_data.get("password")
-            
-
             print("------->",nombreUsuario)
             print("------->",contrasena)
             usuario=authenticate(username=nombreUsuario, password=contrasena)

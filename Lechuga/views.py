@@ -138,12 +138,19 @@ def guardarDatos(fecha1, fecha2, fecha3, fecha4, idUsuario, cantPlantas,request)
     f4 = datetime.datetime.strptime(fecha4, '%d-%m-%Y').strftime('%Y-%m-%d')
     
     #creacion de nombre de registro
-    codigo = str(f1)
-    guion = "-"
-    for x in range(len(guion)):
-     codigo=codigo.replace(guion[x],"")#2023-06-27-->20230627
+    #codigo = str(f1)
+    #guion = "-"
+    #for x in range(len(guion)):
+     #codigo=codigo.replace(guion[x],"")#2023-06-27-->20230627
+    #nombre=codigo+str(crear_claveDeRegistro(request))#fecha+ iniciales del nombre y el apellido:20230627erick
+    #print("------->",nombre)
+    #-------------------------------
+    fecha_actual = datetime.datetime.now()
+    hora_actual = datetime.datetime.now().time()
+    codigo=str(fecha_actual.year)+""+ str(fecha_actual.month)+""+ str(fecha_actual.day)+""+str(hora_actual.hour)+""+ str(hora_actual.minute)+""+str(hora_actual.second)
     nombre=codigo+str(crear_claveDeRegistro(request))#fecha+ iniciales del nombre y el apellido:20230627erick
-    print("------->",nombre)
+    print("===>",nombre)
+    #-------------------------------
 
     lechuga = cultivo(
         nombreRegistro=nombre,

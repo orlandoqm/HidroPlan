@@ -3,6 +3,7 @@ from time  import sleep
 import datetime
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
+from Lechuga.models import cultivo
 
 def ejecutarHilo(**kwargs):
     print("Ha iniciado el hilo")
@@ -12,6 +13,7 @@ def ejecutarHilo(**kwargs):
     f2=kwargs['fechaTrasplante']
     f3=kwargs['fechaCosecha']
     correoDestino=kwargs['correo']
+    nombreR=kwargs['nombre']
     
     #formateo de las fechas para que puedan compararlas "%Y-%m-%d"
     formatting = "%Y-%m-%d"
@@ -24,7 +26,7 @@ def ejecutarHilo(**kwargs):
     fin=False
     diasSumados=0 #contador para simular el paso del dia
     while fin!=True:
-       
+     estadoRegistro=cultivo.objects.filter(nombreRegistro=nombreR).exists()
      fecha_actual = datetime.datetime.now().date()
      fechaA=fecha_actual + datetime.timedelta(days=diasSumados)
    
@@ -34,22 +36,28 @@ def ejecutarHilo(**kwargs):
      print("Fecha G: ",fechaG)
      diasFaltantes=fechaG-fechaA #Se obtiene los dias restantes para que no verifique la fecha todo el tiempo desde el inicio
      print("Diferencias de dias: ",diasFaltantes.days)
-     
-     if fechaA==fechaG:
-       print("Las semillas ya estan germinadas...")
-       asunto="Las semillas ya estan germinadas!!"
-       mensaje="Las semillas ya estan germinadas..."
-       enviar_correo(asunto, mensaje,correoDestino)
-       fin=True
+     if estadoRegistro:
+       if fechaA==fechaG:
+        print("Las semillas ya estan germinadas...")
+        asunto="Las semillas ya estan germinadas!!"
+        mensaje="Las semillas ya estan germinadas..."
+        enviar_correo(asunto, mensaje,correoDestino)
+        fin=True
+       else:
+        diasSumados+=1#contador para simular el paso del dia
+        sleep(1)# 1 dia=1  segundos PRUEBA
+        #tiempoDeEspera=(diasFaltantes.days*86400)+604800# Notificacion a las 7:00 am PROBAR
+        # sleep(tiempoDeEspera)# 1 dia=86400 segundos PRODUCCION
      else:
-      diasSumados+=1#contador para simular el paso del dia
-      sleep(1)# 1 dia=1  segundos PRUEBA
-     #tiempoDeEspera=(diasFaltantes.days*86400)+604800# Notificacion a las 7:00 am PROBAR
-     # sleep(tiempoDeEspera)# 1 dia=86400 segundos PRODUCCION
+       fin=True
+
+     
 
      #ciclo de TRASPLANTE
      fin2=False
     while fin2!=True:
+     
+     estadoRegistro=cultivo.objects.filter(nombreRegistro=nombreR).exists()
      fecha_actual = datetime.datetime.now().date()
      fechaA=fecha_actual + datetime.timedelta(days=diasSumados)
 
@@ -58,18 +66,23 @@ def ejecutarHilo(**kwargs):
      print("Fecha T: ",fechaT)
      diasFaltantes=fechaT-fechaA #Se obtiene los dias restantes para que no verifique la fecha todo el tiempo desde el inicio
      print("Diferencias de dias: ",diasFaltantes.days)
-     if fechaA==fechaT:
-       print("Las plantas listas para trasplantarse...")
-       asunto="Las plantas estan listas para trastaplantar!!"
-       mensaje="Las plantas estan listas para trastaplantar..."
-       enviar_correo(asunto, mensaje,correoDestino)
-       fin2=True
+     if estadoRegistro:
+       if fechaA==fechaT:
+        print("Las plantas listas para trasplantarse...")
+        asunto="Las plantas estan listas para trastaplantar!!"
+        mensaje="Las plantas estan listas para trastaplantar..."
+        enviar_correo(asunto, mensaje,correoDestino)
+        fin2=True
+       else:
+        diasSumados+=1#contador para simular el paso del dia
+        sleep(1)# 1 dia=1  segundos PRUEBA
      else:
-      diasSumados+=1#contador para simular el paso del dia
-      sleep(1)# 1 dia=1  segundos PRUEBA
+      fin2=True
+     
     #ciclo de COSECHA
     fin3=False
     while fin3!=True:
+     estadoRegistro=cultivo.objects.filter(nombreRegistro=nombreR).exists()
      fechaA=fecha_actual + datetime.timedelta(days=diasSumados)
      fecha_actual = datetime.datetime.now().date()
      
@@ -78,15 +91,19 @@ def ejecutarHilo(**kwargs):
      print("Fecha C: ",fechaC)
      diasFaltantes=fechaC-fechaA #Se obtiene los dias restantes para que no verifique la fecha todo el tiempo desde el inicio
      print("Diferencias de dias: ",diasFaltantes.days)
-     if fechaA==fechaC:
-       print("Las plantas listas para cosecharse...")
-       asunto="Las plantas estan listas para cosechar!!"
-       mensaje="Las plantas estan listas para cosechar..."
-       enviar_correo(asunto, mensaje,correoDestino)
-       fin3=True
+     if estadoRegistro:
+        if fechaA==fechaC:
+         print("Las plantas listas para cosecharse...")
+         asunto="Las plantas estan listas para cosechar!!"
+         mensaje="Las plantas estan listas para cosechar..."
+         enviar_correo(asunto, mensaje,correoDestino)
+         fin3=True
+        else:
+         diasSumados+=1#contador para simular el paso del dia
+         sleep(1)
      else:
-      diasSumados+=1#contador para simular el paso del dia
-      sleep(1)
+       fin3=True
+    
     
     print("El hilo ha terminado...")
        
@@ -96,7 +113,7 @@ def ejecutarHilo(**kwargs):
 
 def iniciarTiempo(nombre,fechaSiembra,fechaGerminacion,fechaTrasplante,fechaCosecha,email): 
  hilo1=threading.Thread(target=ejecutarHilo,name=nombre,kwargs={'fechaSiembra': fechaSiembra, 'fechaGerminacion': fechaGerminacion,
-                                                                'fechaTrasplante':fechaTrasplante,'fechaCosecha':fechaCosecha,'correo':email})
+                                                                'fechaTrasplante':fechaTrasplante,'fechaCosecha':fechaCosecha,'correo':email,'nombre':nombre})
  hilo1.start()
  print(hilo1.is_alive)
 
@@ -120,6 +137,11 @@ def obtener_email(request):
     email_usuario = request.user.email
     print("---->",email_usuario)
     return email_usuario
+
+def verificarRegistro(nombreR):
+  estadoRegistro=cultivo.objects.filter(nombreRegistro=nombreR).exists()
+  print("ESTADO::: ",estadoRegistro)
+  return estadoRegistro
 
 #hora_actual = datetime.datetime.now()
 #fecha_actual = datetime.datetime.now().date() #2022-10-21
