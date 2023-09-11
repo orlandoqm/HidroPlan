@@ -95,10 +95,10 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'hidroponico',
+        'NAME': 'bdhidroponico2',
         'USER': 'admin',
-        'PASSWORD': 'mydatabaseRDS',
-        'HOST': 'bddjango.ces2xbpzw8uh.us-east-1.rds.amazonaws.com',
+        'PASSWORD': 'hidroponico2',
+        'HOST': 'bdhidroponico2.cz32tc1svjic.us-east-1.rds.amazonaws.com',
         'PORT': '3306',
     }
 }

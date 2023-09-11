@@ -5,7 +5,6 @@
 <div class="container">
   <h3 style="text-align: center; color: aliceblue">Lechuga batavia</h3>
 
-  
   <form action="" method="POST" style="text-align: right">
     {% csrf_token %}
 
@@ -104,7 +103,6 @@
       <!--  <input class="boton" type="submit" value="Cancelar" > -->
       <input type="submit" class="btn btn-success" name="bt" value="enviar" />
     </div>
-    
 
     <div style="margin: 15px 10px 10px 10px; text-align: center">
       <table name="tabla1" id="tabla1">
@@ -117,10 +115,9 @@
             <th>Cantidad de plantas</th>
             <th>Kg aproximado de cosecha</th>
             <th>pH</th>
-            <th>Temperatura(°C) </th>
+            <th>Temperatura(°C)</th>
           </tr>
         </thead>
-
         <tr>
           <td>{{fechasCalculadas.0}}</td>
           <td>{{fechasCalculadas.1}}</td>
@@ -150,7 +147,6 @@
       </div>
       {% endif %}
     </div>
-   
   </form>
 </div>
 
