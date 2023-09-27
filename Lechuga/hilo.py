@@ -4,6 +4,7 @@ import datetime
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from Lechuga.models import cultivo
+from Lechuga import constantesL
 
 def ejecutarHilo(**kwargs):
     print("Ha iniciado el hilo")
@@ -41,7 +42,7 @@ def ejecutarHilo(**kwargs):
         print("Las semillas ya estan germinadas...")
         asunto="Las semillas ya estan germinadas!!"
         mensaje="Las semillas ya estan germinadas..."
-        enviar_correo(asunto, mensaje,correoDestino)
+        enviar_correo(constantesL.asuntoGerminacion, constantesL.mensajeGerminacion,correoDestino)
         fin=True
        else:
         diasSumados+=1#contador para simular el paso del dia
@@ -71,7 +72,7 @@ def ejecutarHilo(**kwargs):
         print("Las plantas listas para trasplantarse...")
         asunto="Las plantas estan listas para trastaplantar!!"
         mensaje="Las plantas estan listas para trastaplantar..."
-        enviar_correo(asunto, mensaje,correoDestino)
+        enviar_correo(constantesL.asuntoTrasplante, constantesL.mensajeTrasplante,correoDestino)
         fin2=True
        else:
         diasSumados+=1#contador para simular el paso del dia
@@ -96,7 +97,7 @@ def ejecutarHilo(**kwargs):
          print("Las plantas listas para cosecharse...")
          asunto="Las plantas estan listas para cosechar!!"
          mensaje="Las plantas estan listas para cosechar..."
-         enviar_correo(asunto, mensaje,correoDestino)
+         enviar_correo(constantesL.asuntoCosecha, constantesL.mensajeCosecha,correoDestino)
          fin3=True
         else:
          diasSumados+=1#contador para simular el paso del dia

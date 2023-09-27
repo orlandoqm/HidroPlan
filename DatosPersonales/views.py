@@ -7,6 +7,11 @@ from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
 from Autenticacion.views import cerrarSesion
+from django.contrib.auth.models import User
+from Betabel.models import cultivoB
+from Espinaca.models import cultivoE
+
+from Lechuga.models import cultivo
 
 from .forms import UpdateUserForm
 
@@ -34,3 +39,31 @@ class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
     success_message = "Successfully Changed Your Password"
     
     success_url = reverse_lazy('cerrarSesion')
+
+
+@login_required
+def eliminarUsuario(request):
+  id_usuario = request.user.id
+  
+  try:
+    #elimina el usuario
+    usuario_a_eliminar = User.objects.get(id=id_usuario)
+    usuario_a_eliminar .delete()
+
+    #elimina los registros del usuario eliminado
+    listaLechuga=cultivo.objects.filter(idUsuario=id_usuario)
+    listaLechuga.delete()
+    listaBetabel=cultivoB.objects.filter(idUsuario=id_usuario)
+    listaBetabel.delete()
+    listaEspinaca=cultivoE.objects.filter(idUsuario=id_usuario)
+    listaEspinaca.delete()
+
+    print("Se ha eliminado el usuario!!",id_usuario)
+  except User.DoesNotExist:
+     print("Usuario no existe")
+  
+  
+  #cerrarSesion(request)
+
+  return cerrarSesion(request)
+

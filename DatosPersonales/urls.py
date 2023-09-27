@@ -11,5 +11,6 @@ urlpatterns = [
       # path('',views.DatosPersonales, name="datosPersonales"),
       path('',views.profile, name="datosPersonales"),
        path('cambiarContrasena',ChangePasswordView.as_view(), name="cambiarContrasena"),
+        path('eliminarUsuario',views.eliminarUsuario, name="eliminarUsuario"),
        
 ]

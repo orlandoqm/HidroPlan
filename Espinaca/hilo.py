@@ -3,6 +3,8 @@ from time  import sleep
 import datetime
 from django.core.mail import send_mail
 
+from Espinaca import constantesE
+
 def ejecutarHilo(**kwargs):
     print("Ha iniciado el hilo")
     print(f'{threading.current_thread().name} {threading.get_native_id()}')
@@ -37,7 +39,7 @@ def ejecutarHilo(**kwargs):
        print("Las semillas ya estan germinadas...")
        asunto="Las semillas ya estan germinadas!!"
        mensaje="Las semillas ya estan germinadas..."
-       enviar_correo(asunto, mensaje,correoDestino)
+       enviar_correo(constantesE.asuntoGerminacion, constantesE.mensajeGerminacion,correoDestino)
        fin=True
      else:
       diasSumados+=1#contador para simular el paso del dia
@@ -60,7 +62,7 @@ def ejecutarHilo(**kwargs):
        print("Las plantas listas para trasplantarse...")
        asunto="Las plantas estan listas para trastaplantar!!"
        mensaje="Las plantas estan listas para trastaplantar..."
-       enviar_correo(asunto, mensaje,correoDestino)
+       enviar_correo(constantesE.asuntoTrasplante, constantesE.mensajeTrasplante,correoDestino)
        fin2=True
      else:
       diasSumados+=1#contador para simular el paso del dia
@@ -80,7 +82,7 @@ def ejecutarHilo(**kwargs):
        print("Las plantas listas para cosecharse...")
        asunto="Las plantas estan listas para cosechar!!"
        mensaje="Las plantas estan listas para cosechar..."
-       enviar_correo(asunto, mensaje,correoDestino)
+       enviar_correo(constantesE.asuntoCosecha, constantesE.mensajeCosecha,correoDestino)
        fin3=True
      else:
       diasSumados+=1#contador para simular el paso del dia
