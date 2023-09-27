@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.views.generic import View
 from django.contrib.auth import login,logout, authenticate
 from django.contrib import messages
+from .forms import CustomLoginForm
 
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 
@@ -36,7 +37,7 @@ def cerrarSesion(request):
 
     return redirect('home')
 
-def iniciarSesion(request):
+def iniciarSesionx(request):
 
     if request.method=="POST":
         form=AuthenticationForm(request,data=request.POST)
@@ -58,7 +59,29 @@ def iniciarSesion(request):
     return render(request,"Login/login.html",{"form":form})
 
                 
+def iniciarSesion(request):
+    if request.method == 'POST':
+        form = CustomLoginForm(request, data=request.POST)
+        if form.is_valid():
+           
+            form=AuthenticationForm(request,data=request.POST)
+        if form.is_valid():
+            nombreUsuario=form.cleaned_data.get("username")
+            contrasena=form.cleaned_data.get("password")
+            print("------->",nombreUsuario)
+            print("------->",contrasena)
+            usuario=authenticate(username=nombreUsuario, password=contrasena)
+            if usuario is not None:
+                login(request,usuario)
+                return redirect('home')
+            else:
+                messages.error(request,"Usuario no válido")
 
+        else:
+            messages.error(request,"Datos incorrectos")
+    else:
+        form = CustomLoginForm(request)
+    return render(request,"Login/login.html",{"form":form})
     
 
 
