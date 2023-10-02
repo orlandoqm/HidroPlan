@@ -40,8 +40,7 @@ def ejecutarHilo(**kwargs):
      if estadoRegistro:
        if fechaA==fechaG:
         print("Las semillas ya estan germinadas...")
-        asunto="Las semillas ya estan germinadas!!"
-        mensaje="Las semillas ya estan germinadas..."
+       
         enviar_correo(constantesL.asuntoGerminacion, constantesL.mensajeGerminacion,correoDestino)
         fin=True
        else:

@@ -148,7 +148,7 @@ def guardarDatos(fecha1, fecha2, fecha3, fecha4, idUsuario, cantPlantas,request)
     fecha_actual = datetime.datetime.now()
     hora_actual = datetime.datetime.now().time()
     codigo=str(fecha_actual.year)+""+ str(fecha_actual.month)+""+ str(fecha_actual.day)+""+str(hora_actual.hour)+""+ str(hora_actual.minute)+""+str(hora_actual.second)
-    nombre=codigo+str(crear_claveDeRegistro(request))#fecha+ iniciales del nombre y el apellido:20230627erick
+    nombre=codigo+str(crear_claveDeRegistro(request,idUsuario))#fecha+ iniciales del nombre y el apellido:20230627erick
     print("===>",nombre)
     #-------------------------------
 
@@ -201,7 +201,7 @@ def obtenerCaracteristica(clave):
     return diccRequierimientos[clave]
 
 @login_required
-def crear_claveDeRegistro(request):
+def crear_claveDeRegistro(request,idUsuario):
    
  #en caso de incuir clace con hora
  hora_actual = datetime.datetime.now()
@@ -209,13 +209,15 @@ def crear_claveDeRegistro(request):
  nombreUsuario = request.user.first_name
  apellidoUsuario = request.user.last_name
     #string = 'hola mundo python'
-
- words = apellidoUsuario.split(' ') 
- caracter = ''
-
- for word in words:
+ if nombreUsuario=="":
+   nombreUsuario=idUsuario
+ else:    
+  words = apellidoUsuario.split(' ') 
+  caracter = ''
+  for word in words:
      caracter += word[0]
      nombreUsuario=nombreUsuario[0]+caracter
+
  return nombreUsuario
 
 @login_required

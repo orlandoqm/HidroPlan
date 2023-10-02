@@ -139,7 +139,7 @@ def guardarDatos(fecha1, fecha2, fecha3, fecha4, idUsuario, cantPlantas,request)
     for x in range(len(guion)):
      codigo=codigo.replace(guion[x],"")
 
-    nombre=codigo+str(crear_claveDeRegistro(request))#nombre de usuario+fecha:20230627erick
+    nombre=codigo+str(crear_claveDeRegistro(request, idUsuario))#nombre de usuario+fecha:20230627erick
 
     betabel = cultivoB(
         nombreRegistro=nombre,
@@ -188,7 +188,7 @@ def obtenerCaracteristica(clave):#cambiar valores
 
     return diccRequierimientos[clave]
 @login_required
-def crear_claveDeRegistro(request):
+def crear_claveDeRegistro(request,idUsuario):
    
  #en caso de incuir clace con hora
  hora_actual = datetime.datetime.now()
@@ -197,11 +197,13 @@ def crear_claveDeRegistro(request):
  nombreUsuario = request.user.first_name
  apellidoUsuario = request.user.last_name
     #string = 'hola mundo python'
-
- words = apellidoUsuario.split(' ') 
- caracter = ''
-
- for word in words:
+ if nombreUsuario == "":
+     nombreUsuario=idUsuario
+ else:
+     
+  words = apellidoUsuario.split(' ') 
+  caracter = ''
+  for word in words:
      caracter += word[0]
      nombreUsuario=nombreUsuario[0]+caracter
  return nombreUsuario

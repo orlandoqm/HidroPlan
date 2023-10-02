@@ -36,8 +36,6 @@ def ejecutarHilo(**kwargs):
      print("Diferencias de dias: ",diasFaltantes.days)
      
      if fechaA==fechaG:
-       print("Las semillas ya estan germinadas...",constantesB.avisoGerminacion)
-    
       
        enviar_correo(constantesB.asuntoGerminacion, constantesB.mensajeGerminacion,correoDestino)
        fin=True
